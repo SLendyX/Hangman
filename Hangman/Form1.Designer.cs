@@ -35,16 +35,20 @@
             this.gameOverText = new System.Windows.Forms.TextBox();
             this.startBtn = new System.Windows.Forms.Button();
             this.quitBtn = new System.Windows.Forms.Button();
+            this.Debug = new System.Windows.Forms.TextBox();
+            this.guessedLetters = new System.Windows.Forms.TextBox();
+            this.guessedWordsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
             this.SuspendLayout();
             // 
             // input
             // 
-            this.input.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input.Location = new System.Drawing.Point(365, 423);
+            this.input.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input.Location = new System.Drawing.Point(355, 425);
             this.input.Name = "input";
-            this.input.Size = new System.Drawing.Size(83, 26);
+            this.input.Size = new System.Drawing.Size(98, 35);
             this.input.TabIndex = 0;
+            this.input.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // guessBtn
             // 
@@ -74,6 +78,7 @@
             this.guessedWord.ReadOnly = true;
             this.guessedWord.Size = new System.Drawing.Size(255, 26);
             this.guessedWord.TabIndex = 3;
+            this.guessedWord.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // gameOverText
             // 
@@ -85,6 +90,7 @@
             this.gameOverText.ReadOnly = true;
             this.gameOverText.Size = new System.Drawing.Size(295, 68);
             this.gameOverText.TabIndex = 4;
+            this.gameOverText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // startBtn
             // 
@@ -108,11 +114,41 @@
             this.quitBtn.UseVisualStyleBackColor = true;
             this.quitBtn.Click += new System.EventHandler(this.Quit);
             // 
+            // Debug
+            // 
+            this.Debug.AcceptsReturn = true;
+            this.Debug.Location = new System.Drawing.Point(645, 22);
+            this.Debug.Multiline = true;
+            this.Debug.Name = "Debug";
+            this.Debug.Size = new System.Drawing.Size(213, 472);
+            this.Debug.TabIndex = 7;
+            // 
+            // guessedLetters
+            // 
+            this.guessedLetters.Location = new System.Drawing.Point(45, 58);
+            this.guessedLetters.Multiline = true;
+            this.guessedLetters.Name = "guessedLetters";
+            this.guessedLetters.Size = new System.Drawing.Size(143, 98);
+            this.guessedLetters.TabIndex = 8;
+            // 
+            // guessedWordsLabel
+            // 
+            this.guessedWordsLabel.AutoSize = true;
+            this.guessedWordsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guessedWordsLabel.Location = new System.Drawing.Point(40, 22);
+            this.guessedWordsLabel.Name = "guessedWordsLabel";
+            this.guessedWordsLabel.Size = new System.Drawing.Size(148, 25);
+            this.guessedWordsLabel.TabIndex = 9;
+            this.guessedWordsLabel.Text = "Guessed letters";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 562);
+            this.Controls.Add(this.guessedWordsLabel);
+            this.Controls.Add(this.guessedLetters);
+            this.Controls.Add(this.Debug);
             this.Controls.Add(this.quitBtn);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.gameOverText);
@@ -137,6 +173,9 @@
         private System.Windows.Forms.TextBox gameOverText;
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Button quitBtn;
+        private System.Windows.Forms.TextBox Debug;
+        private System.Windows.Forms.TextBox guessedLetters;
+        private System.Windows.Forms.Label guessedWordsLabel;
     }
 }
 
