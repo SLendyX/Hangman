@@ -30,6 +30,7 @@ namespace Hangman
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.input = new System.Windows.Forms.TextBox();
             this.guessBtn = new System.Windows.Forms.Button();
             this.mainFrame = new System.Windows.Forms.PictureBox();
@@ -196,6 +197,8 @@ namespace Hangman
             this.Controls.Add(this.mainFrame);
             this.Controls.Add(this.guessBtn);
             this.Controls.Add(this.input);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Hangman";
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();

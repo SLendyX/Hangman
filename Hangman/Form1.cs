@@ -35,8 +35,6 @@ namespace Hangman
         public string Word;
         public string hiddenWord;
 
-        public int PozYStart { get => startBtn.Location.Y; set => PozYStart = value; }
-        public int PozYQuit { get => quitBtn.Location.Y; set => PozYQuit = value; }
         public Form1()
         {
             InitializeComponent();
@@ -162,6 +160,7 @@ namespace Hangman
 
         private void Start_Game(object sender, EventArgs e)
         {
+            frameIndex = 0;
             guessBtn.Visible = true;
             input.Visible = true;
             guessedWord.Visible = true;
@@ -172,6 +171,7 @@ namespace Hangman
 
             startBtn.Visible = false;
             quitBtn.Visible = false;
+            continueBtn.Visible = false;
 
             input.Text = string.Empty;
             guessedLetters.Text = string.Empty;
@@ -197,7 +197,6 @@ namespace Hangman
 
         private void Game_Won()
         {
-            frameIndex = 0;
             gameOverText.Visible = true;
             gameOverText.Text = "You Won!";
             guessBtn.Visible = false;
@@ -214,7 +213,6 @@ namespace Hangman
 
         private void Game_Over()
         {
-            frameIndex = 0;
             gameOverText.Visible = true;
             gameOverText.Text = "Game Over!";
             guessBtn.Visible = false;
@@ -310,6 +308,13 @@ namespace Hangman
             {
                 if (chars[i] != ' ')
                 {
+                    if (i == 0 || i == word.Length - 1)
+                    {
+                        newchars[j++] = chars[i];
+                        newchars[j++] = ' ';
+                        continue;
+                    }
+
                     newchars[j++] = '_';
                 }
                 newchars[j++] = ' ';

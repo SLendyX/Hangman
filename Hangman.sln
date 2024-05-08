@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman", "Hangman\Hangman.csproj", "{34B20DF8-4E98-46F9-8FF8-6EA8CBD3015D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Hangman_Setup", "Hangman_Setup\Hangman_Setup.vdproj", "{2E092DBD-0B12-422A-8B36-4BB7793EB8F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{34B20DF8-4E98-46F9-8FF8-6EA8CBD3015D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34B20DF8-4E98-46F9-8FF8-6EA8CBD3015D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34B20DF8-4E98-46F9-8FF8-6EA8CBD3015D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E092DBD-0B12-422A-8B36-4BB7793EB8F6}.Debug|Any CPU.ActiveCfg = Debug
+		{2E092DBD-0B12-422A-8B36-4BB7793EB8F6}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
