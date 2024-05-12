@@ -433,17 +433,14 @@ namespace Hangman
             int interger = 0;
             for(int i=1; i < chars.Length; i++)
             {
-                Console.WriteLine(chars[i]);
                 interger *= 10;
                 interger += (chars[i]-'0');
                
             }
-            Console.WriteLine(chars);
-            Console.WriteLine(interger);
             if (chars[0] == '-')
                 interger *= -1;
 
-            Console.WriteLine(interger);
+
 
             return interger;
         }
