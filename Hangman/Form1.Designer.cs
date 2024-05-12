@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Hangman
 {
@@ -43,6 +44,7 @@ namespace Hangman
             this.menuBtn = new System.Windows.Forms.Button();
             this.continueBtn = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.highScoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
             this.SuspendLayout();
             // 
@@ -180,11 +182,22 @@ namespace Hangman
             this.errorLabel.Text = "PlaceHolder";
             this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // highScoreLabel
+            // 
+            this.highScoreLabel.AutoSize = true;
+            this.highScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highScoreLabel.Location = new System.Drawing.Point(12, 12);
+            this.highScoreLabel.Name = "highScoreLabel";
+            this.highScoreLabel.Size = new System.Drawing.Size(0, 22);
+            this.highScoreLabel.TabIndex = 14;
+            this.highScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 562);
+            this.Controls.Add(this.highScoreLabel);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.continueBtn);
             this.Controls.Add(this.menuBtn);
@@ -204,7 +217,10 @@ namespace Hangman
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            //
+            //close window
+            //
+            this.Closed += new EventHandler(Form1_FormClosing);
         }
 
         #endregion
@@ -221,6 +237,7 @@ namespace Hangman
         private Button menuBtn;
         private Button continueBtn;
         private Label errorLabel;
+        private Label highScoreLabel;
     }
 }
 

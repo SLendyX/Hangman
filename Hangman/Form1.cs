@@ -12,13 +12,13 @@ using System.Xml.Linq;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-
+using System.Runtime.CompilerServices;
 
 namespace Hangman
 {
+
     public partial class Form1 : Form
     {
-
         //declare variables
         public int frameIndex = 0;
         public string[] Frame =
@@ -35,15 +35,29 @@ namespace Hangman
         public string Word;
         public string hiddenWord;
 
+        
+        public int HighScore;
+        
+        
+        public int CurrentScore;
+
+        public bool GameWon;
+        public bool GameLost;
+
         public Form1()
         {
             InitializeComponent();
+            InitializeHighScore();
             Intialize_Game();
+
+            
         }
-   
+        
+
         private void GuessBtn_Click(object sender, EventArgs e)
         {
             Check_Letter_in_Word();
+            
         }
 
         private void Input_Enter(object sender, KeyEventArgs e)
@@ -77,7 +91,14 @@ namespace Hangman
                         if (Word.ToLower().IndexOf(letter) < 0)
                         {
                             guessedLetters.AppendText(letter.ToString() + " ");
-                            LoadFrame(Frame[frameIndex++]);
+                            try
+                            {
+                                LoadFrame(Frame[frameIndex++]);
+                            }catch
+                            {
+                                Game_Over();
+                                break;
+                            }
                         }
                         else
                         {
@@ -136,6 +157,7 @@ namespace Hangman
 
         private void Intialize_Game()
         {
+
             gameOverText.Visible = false;
             guessBtn.Visible = false;
             input.Visible = false;  
@@ -149,7 +171,11 @@ namespace Hangman
 
             startBtn.Visible = true;
             quitBtn.Visible = true;
-           
+
+            highScoreLabel.Text = "High score: " + HighScore.ToString();
+            GameLost = false;
+            GameWon = false;
+            CurrentScore = 0;
         }
 
         private void LoadFrame(string frame)
@@ -172,6 +198,13 @@ namespace Hangman
             startBtn.Visible = false;
             quitBtn.Visible = false;
             continueBtn.Visible = false;
+
+            if (!GameWon && !GameLost)
+                CurrentScore = 0;
+            highScoreLabel.Text = "Current score: " + CurrentScore.ToString();
+
+            GameLost = false;
+            GameWon = false;
 
             input.Text = string.Empty;
             guessedLetters.Text = string.Empty;
@@ -209,6 +242,10 @@ namespace Hangman
             startBtn.Text = "New Game";
             startBtn.Visible = true;
             quitBtn.Visible = true;
+            GameWon = true;
+            CurrentScore++;
+
+            highScoreLabel.Text = "Current score: " + CurrentScore.ToString();
         }
 
         private void Game_Over()
@@ -226,6 +263,17 @@ namespace Hangman
             startBtn.Visible = true;
             quitBtn.Visible = true;
 
+            if(CurrentScore > HighScore)
+            {
+                HighScore = CurrentScore;
+                StreamWriter sw = new StreamWriter(".\\data.dat", false);
+                sw.Write(encode(HighScore));
+                sw.Close();
+            }
+
+            CurrentScore = 0;
+            GameLost = true;
+            highScoreLabel.Text = "High score: " + HighScore.ToString();
 
             char[] answer = new char[Word.Length * 2];
 
@@ -239,7 +287,26 @@ namespace Hangman
 
         private void Quit(object sender, EventArgs e)
         {
+            if (CurrentScore > HighScore)
+            {
+                HighScore = CurrentScore;
+                StreamWriter sw = new StreamWriter(".\\data.dat", false);
+                sw.Write(encode(HighScore));
+                sw.Close();
+            }
+
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void Form1_FormClosing(object sender, EventArgs e)
+        {
+            if (CurrentScore > HighScore)
+            {
+                HighScore = CurrentScore;
+                StreamWriter sw = new StreamWriter(".\\data.dat", false);
+                sw.Write(encode(HighScore));
+                sw.Close();
+            }
         }
 
         private void Menu_Click(object sender, EventArgs e)
@@ -258,6 +325,7 @@ namespace Hangman
 
             startBtn.Text = "New Game";
 
+            highScoreLabel.Text = "High score: " + HighScore.ToString();
         }
 
         private void Continue_Click(object sender, EventArgs e)
@@ -274,6 +342,8 @@ namespace Hangman
             startBtn.Visible = false;
             quitBtn.Visible = false;
             continueBtn.Visible = false;
+
+            highScoreLabel.Text = "Current score: " + CurrentScore.ToString();
         }
 
 
@@ -321,6 +391,61 @@ namespace Hangman
             }
 
             return new string(newchars);
+        }
+
+        private void InitializeHighScore()
+        {
+            StreamReader sr = new StreamReader(".\\data.dat");
+            string score = sr.ReadLine();
+            sr.Close();
+            if (score == "" || score == null)
+                HighScore = 0;
+            else    
+                HighScore = decode(score);
+            
+        }
+
+       private string encode(int source)
+       {
+
+            char[] buffer = (~source).ToString().ToCharArray();
+
+            for (int i = 0; i < buffer.Length; i++)
+                buffer[i] -= '0';
+
+            return new string(buffer);
+
+       }
+
+       private int decode(string source) {
+
+            char[] buffer = source.ToCharArray();
+            for(int i=0; i< buffer.Length; i++)
+                buffer[i] += '0';
+
+            int result = ConvertChartoInt32(buffer);
+
+            return ~result;
+       }
+
+        private int ConvertChartoInt32(char[] chars)
+        {
+            int interger = 0;
+            for(int i=1; i < chars.Length; i++)
+            {
+                Console.WriteLine(chars[i]);
+                interger *= 10;
+                interger += (chars[i]-'0');
+               
+            }
+            Console.WriteLine(chars);
+            Console.WriteLine(interger);
+            if (chars[0] == '-')
+                interger *= -1;
+
+            Console.WriteLine(interger);
+
+            return interger;
         }
     }
 }
