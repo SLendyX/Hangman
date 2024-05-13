@@ -395,7 +395,18 @@ namespace Hangman
 
         private void InitializeHighScore()
         {
-            StreamReader sr = new StreamReader(".\\data.dat");
+            StreamReader sr;
+
+            try
+            {
+                sr = new StreamReader(".\\data.dat");
+            }
+            catch
+            {
+                FileStream fs = File.Create(".\\data.dat");
+                fs.Close();
+                sr = new StreamReader(".\\data.dat");
+            }
             string score = sr.ReadLine();
             sr.Close();
             if (score == "" || score == null)

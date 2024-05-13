@@ -214,13 +214,11 @@ namespace Hangman
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Hangman";
+            this.Closed += new System.EventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-            //
-            //close window
-            //
-            this.Closed += new EventHandler(Form1_FormClosing);
+
         }
 
         #endregion
