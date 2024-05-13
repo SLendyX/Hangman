@@ -34,13 +34,102 @@ namespace Hangman
 
         public string Word;
         public string hiddenWord;
+        
+        public class Question
+        {
+            string QuestionString;
+            string[] Answers;
+            bool[] CorrectAnswer;
+
+            public void SetQuestionString(string Question)
+            {
+                QuestionString = Question;
+            }
+
+            public void SetAnswers(string[] AnswersString)
+            {
+                Answers = AnswersString;
+               
+            }
+
+            public void SetCorrectAnswers(bool[] CorrectAnswerBools)
+            {
+                CorrectAnswer = CorrectAnswerBools;
+            }
+
+            public string GetQuestion()
+            {
+                return QuestionString;
+            }
+
+            public string[] GetAnswers()
+            {
+                return Answers;
+            }
+
+            public bool[] GetCorrectAnswers()
+            {
+                return CorrectAnswer;
+            }
+        }
+
+        public List<Question> Questions = new List<Question>();
+        
+        
+
+
 
         public Form1()
         {
             InitializeComponent();
             Intialize_Game();
+            InitializeList();
         }
    
+        private void InitializeList()
+        {
+            
+            for (int i = 0; i< 7;i++)
+            {
+                Questions.Add(new Question { });
+            }
+
+            StreamReader sr = new StreamReader(".\\input\\Raspunsuri_quiz_PA.txt");
+            foreach (Question question in Questions)
+            {
+                string line = sr.ReadLine();
+                string[] section = line.Split(';');
+                string[] answers = new string [section.Length - 1];
+                question.SetQuestionString(section[0]);
+
+                for(int i=1; i< section.Length; i++)
+                {
+                    answers[i-1] = section[i];
+                }
+
+                question.SetAnswers(answers);
+            }
+
+
+            sr.Close();
+            
+
+            
+
+            foreach (Question a in Questions)
+            {
+                Console.WriteLine(a.GetQuestion());
+
+
+                string[] answers = a.GetAnswers();
+                for (int i=0; i<answers.Length; i++)
+                {
+                    Console.WriteLine($"{i} {answers[i]}");
+                }
+            }
+        }
+        
+
         private void GuessBtn_Click(object sender, EventArgs e)
         {
             Check_Letter_in_Word();
@@ -136,6 +225,8 @@ namespace Hangman
 
         private void Intialize_Game()
         {
+            
+
             gameOverText.Visible = false;
             guessBtn.Visible = false;
             input.Visible = false;  
