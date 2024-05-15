@@ -39,25 +39,27 @@ namespace Hangman
             this.continueBtn = new System.Windows.Forms.Button();
             this.mainFrame = new System.Windows.Forms.PictureBox();
             this.questionLabel = new System.Windows.Forms.Label();
+            this.nextBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
             this.SuspendLayout();
             // 
             // submitBtn
             // 
             this.submitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitBtn.Location = new System.Drawing.Point(361, 550);
+            this.submitBtn.Location = new System.Drawing.Point(818, 319);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(98, 35);
             this.submitBtn.TabIndex = 1;
             this.submitBtn.Text = "Submit";
             this.submitBtn.UseVisualStyleBackColor = true;
+            this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
             // gameOverText
             // 
             this.gameOverText.BackColor = System.Drawing.SystemColors.Window;
             this.gameOverText.Enabled = false;
             this.gameOverText.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gameOverText.Location = new System.Drawing.Point(261, 78);
+            this.gameOverText.Location = new System.Drawing.Point(261, 12);
             this.gameOverText.MaxLength = 10;
             this.gameOverText.Name = "gameOverText";
             this.gameOverText.ReadOnly = true;
@@ -68,7 +70,7 @@ namespace Hangman
             // startBtn
             // 
             this.startBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startBtn.Location = new System.Drawing.Point(342, 165);
+            this.startBtn.Location = new System.Drawing.Point(342, 107);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(138, 73);
             this.startBtn.TabIndex = 5;
@@ -79,7 +81,7 @@ namespace Hangman
             // quitBtn
             // 
             this.quitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitBtn.Location = new System.Drawing.Point(342, 244);
+            this.quitBtn.Location = new System.Drawing.Point(342, 186);
             this.quitBtn.Name = "quitBtn";
             this.quitBtn.Size = new System.Drawing.Size(138, 72);
             this.quitBtn.TabIndex = 6;
@@ -91,7 +93,7 @@ namespace Hangman
             // 
             this.menuBtn.CausesValidation = false;
             this.menuBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuBtn.Location = new System.Drawing.Point(361, 602);
+            this.menuBtn.Location = new System.Drawing.Point(32, 28);
             this.menuBtn.Name = "menuBtn";
             this.menuBtn.Size = new System.Drawing.Size(98, 34);
             this.menuBtn.TabIndex = 11;
@@ -103,7 +105,7 @@ namespace Hangman
             // continueBtn
             // 
             this.continueBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continueBtn.Location = new System.Drawing.Point(342, 86);
+            this.continueBtn.Location = new System.Drawing.Point(342, 28);
             this.continueBtn.Name = "continueBtn";
             this.continueBtn.Size = new System.Drawing.Size(138, 73);
             this.continueBtn.TabIndex = 12;
@@ -113,7 +115,7 @@ namespace Hangman
             // 
             // mainFrame
             // 
-            this.mainFrame.Location = new System.Drawing.Point(231, 12);
+            this.mainFrame.Location = new System.Drawing.Point(230, 0);
             this.mainFrame.Name = "mainFrame";
             this.mainFrame.Size = new System.Drawing.Size(350, 300);
             this.mainFrame.TabIndex = 2;
@@ -122,19 +124,29 @@ namespace Hangman
             // questionLabel
             // 
             this.questionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.questionLabel.Location = new System.Drawing.Point(73, 319);
+            this.questionLabel.Location = new System.Drawing.Point(28, 306);
             this.questionLabel.Name = "questionLabel";
-            this.questionLabel.Size = new System.Drawing.Size(596, 79);
+            this.questionLabel.Size = new System.Drawing.Size(770, 105);
             this.questionLabel.TabIndex = 13;
             this.questionLabel.Text = "label1";
             // 
+            // nextBtn
+            // 
+            this.nextBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextBtn.Location = new System.Drawing.Point(818, 360);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(98, 35);
+            this.nextBtn.TabIndex = 15;
+            this.nextBtn.Text = "Next";
+            this.nextBtn.UseVisualStyleBackColor = true;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(860, 648);
-            this.Controls.Add(this.questionLabel);
+            this.ClientSize = new System.Drawing.Size(928, 761);
+            this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.continueBtn);
             this.Controls.Add(this.menuBtn);
             this.Controls.Add(this.quitBtn);
@@ -142,6 +154,7 @@ namespace Hangman
             this.Controls.Add(this.gameOverText);
             this.Controls.Add(this.mainFrame);
             this.Controls.Add(this.submitBtn);
+            this.Controls.Add(this.questionLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -161,6 +174,7 @@ namespace Hangman
         private Button menuBtn;
         private Button continueBtn;
         private Label questionLabel;
+        private Button nextBtn;
     }
 }
 
