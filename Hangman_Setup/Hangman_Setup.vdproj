@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_24BF17E3D64945F7AEF43B3903301CFD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9755D89308B04A7CBCB835A9ED03E0DF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -64,6 +70,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E59A6EF966844647B723D676EE72F1FF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F2EA2A8E37654097BB3A2B161E8996C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -226,6 +238,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24BF17E3D64945F7AEF43B3903301CFD"
+            {
+            "SourcePath" = "8:..\\Hangman\\bin\\Debug\\images\\back6.png"
+            "TargetName" = "8:back6.png"
+            "Tag" = "8:"
+            "Folder" = "8:_191B9B892AFE403D969D7D169A25CFA9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9755D89308B04A7CBCB835A9ED03E0DF"
             {
             "SourcePath" = "8:..\\Hangman\\bin\\Debug\\images\\frame_6.png"
@@ -341,6 +373,26 @@
             {
             "SourcePath" = "8:..\\Hangman\\bin\\Debug\\images\\frame_2.png"
             "TargetName" = "8:frame_2.png"
+            "Tag" = "8:"
+            "Folder" = "8:_191B9B892AFE403D969D7D169A25CFA9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2EA2A8E37654097BB3A2B161E8996C1"
+            {
+            "SourcePath" = "8:..\\Hangman\\bin\\Debug\\images\\back.png"
+            "TargetName" = "8:back.png"
             "Tag" = "8:"
             "Folder" = "8:_191B9B892AFE403D969D7D169A25CFA9"
             "Condition" = "8:"
@@ -476,7 +528,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Hangman"
         "ProductCode" = "8:{F6C3EF8F-30CF-492C-ACB0-EF2D44D91667}"
-        "PackageCode" = "8:{F1EF8134-19F9-4CF2-AB72-FDF2A7EEF862}"
+        "PackageCode" = "8:{CD437B90-9DE9-41C8-945A-B1934D80B9A7}"
         "UpgradeCode" = "8:{6908A0AA-7DDE-4F08-A3D9-39D378B6530C}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
@@ -493,7 +545,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_14BC0820A4064DE38F2B5F775055EBE1"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
