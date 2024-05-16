@@ -272,7 +272,6 @@ namespace Hangman
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackgroundImage = global::Hangman.Properties.Resources.back6;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(928, 905);
             this.Controls.Add(this.secretLabel);
