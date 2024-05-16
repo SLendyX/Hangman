@@ -13,13 +13,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using static Hangman.Form1;
-
+using System.Windows;
 
 namespace Hangman
 {
     public partial class Form1 : Form
     {
-
         //declare variables
         public int frameIndex = 0;
         public string[] Frame =
@@ -73,18 +72,21 @@ namespace Hangman
 
         public List<Question> Questions = new List<Question>();       
         public List<CheckBox> cbList = new List<CheckBox>();
-        public int listIndex = 0;
+        public int listIndex = 7;
         public bool[] answers = new bool[9];
+        public int totalCorrect = 0;
 
+        Screen display = Screen.PrimaryScreen;
 
-
+        
         public Form1()
         {
+            Location = new Point(display.Bounds.Width/3, display.Bounds.Height/4);
             InitializeComponent();
             Intialize_Game();
         }
 
-
+        
         private void submitBtn_Click(object sender, EventArgs e)
         {
             if (!cbList[0].AutoCheck)
@@ -126,11 +128,10 @@ namespace Hangman
                 i++;
             }
 
-            if(!correct)
+            if (!correct)
                 LoadFrame(Frame[frameIndex++]);
-
-            if(frameIndex == Frame.Length)
-                Game_Over();
+            else
+                totalCorrect++;
 
             nextBtn.Enabled = true;
             submitBtn.Enabled = false;
@@ -139,7 +140,6 @@ namespace Hangman
 
         private void InitializeList()
         {
-            
             for (int i = 0; i< 7;i++)
             {
                 Questions.Add(new Question { });
@@ -182,21 +182,22 @@ namespace Hangman
 
         private void Intialize_Game()
         {
+            Size = new Size(400, 400);
             InitializeList();
 
-            gameOverText.Visible = false;
+            BackgroundImage = System.Drawing.Image.FromFile(".\\images\\back.png");
             submitBtn.Visible = false;
             mainFrame.Visible = false;
             questionLabel.Visible = false;
-            
+            procentLabel.Visible = false;
             nextBtn.Visible = false;
             menuBtn.Visible = false;
             continueBtn.Visible = false;
-
+            legendBox.Visible = false;
+            secretLabel.Visible = false;
 
             startBtn.Visible = true;
             quitBtn.Visible = true;
-           
         }
 
         private void LoadFrame(string frame)
@@ -213,35 +214,49 @@ namespace Hangman
         private void LoadAnswers(Question question)
         {   
             int x = questionLabel.Location.X+30;
-            int y = questionLabel.Location.Y+30;
-            int increment = 80;
+            int y = questionLabel.Location.Y;
+            questionLabel.Size = new Size(874, 40);
+
+            int increment = 70;
+            int sizeOffset = 80;
+            int initialOffset = 30;
             if (listIndex == Questions.Count)
             {
-                y += 40;
-                Size = new Size(944, 830);
-                increment = 40;
-            }
-            
+                y += 90;
 
+                increment = 40;
+                sizeOffset = 40;
+                initialOffset = 5;
+                questionLabel.Location = new Point(30, 440);
+                questionLabel.Size = new Size(874, 90);
+            }
+
+            if(listIndex == 4)
+            {
+                questionLabel.Size = new Size(874, 60);
+                initialOffset = 40;
+            }
 
             string[] answers = question.GetAnswers();
             List<CheckBox> cb = new List<CheckBox>();
             for (int i = 0; i < answers.Length; i++)
             {
-                y+= increment;
+                if (i == 0)
+                    y += initialOffset;
+                else
+                    y+= increment;
+
                 cb.Add(new CheckBox());
                 cb[i].TextAlign = ContentAlignment.MiddleLeft;
-                cb[i].Font = new Font("Microsoft Sans Serif", 11, FontStyle.Regular);
+                cb[i].Font = new Font("Dutch801 Rm BT", 11, FontStyle.Regular);
                 cb[i].Text = answers[i];
                 cb[i].Location = new Point(x, y);
                 cb[i].AutoSize = false;
-                cb[i].Size = new Size(763, increment);
+                cb[i].Size = new Size(763, sizeOffset);
+                cb[i].BackColor = Color.Transparent;
                 cb[i].Click += new EventHandler(Set_Submit);
 
                 this.Controls.Add(cb[i]);
-
-                if(i==0)
-                    cb[i].BringToFront();
             }
 
             cbList = cb;
@@ -260,12 +275,16 @@ namespace Hangman
             submitBtn.Enabled = false;
         }
 
-
-
         private void Start_Game(object sender, EventArgs e)
         {
             frameIndex = 0;
             listIndex = 0;
+            totalCorrect = 0;
+
+            Location = new Point(display.Bounds.Width/5, display.Bounds.Height/16);
+
+
+            BackgroundImage = System.Drawing.Image.FromFile(".\\images\\back6.png");
 
             foreach (CheckBox cb in cbList)
             {
@@ -273,7 +292,7 @@ namespace Hangman
             }
             cbList.Clear();
 
-
+            legendBox.Visible = true;
             submitBtn.Visible = true;
             submitBtn.Enabled = false;
             questionLabel.Visible = true;
@@ -286,33 +305,45 @@ namespace Hangman
             startBtn.Visible = false;
             quitBtn.Visible = false;
             continueBtn.Visible = false;
+            gameOverText.Visible = false;
+            procentLabel.Visible = false;
+
+
+            Size = new Size(944, 948);
 
             LoadQuestion(Questions[listIndex]);
             LoadAnswers(Questions[listIndex++]);
             LoadFrame(Frame[frameIndex++]);
 
-            
+            mainFrame.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
-
-
-
-
 
         private void Game_Won()
         {
-            gameOverText.Visible = true;
-            gameOverText.Text = "You Won!";
             submitBtn.Visible = false;
             nextBtn.Visible = false;
-
+            legendBox.Visible = false;
             mainFrame.Visible = false;
 
+            double score = ((double)((int)((double)(totalCorrect) / 7 * 10000)) / 100);
+
+            if (score == 100)
+            {
+                secretLabel.Visible = true;
+                procentLabel.Location = new Point(316, 100);
+            }
+            else
+            {
+                startBtn.Visible = true;
+            }
+
+            procentLabel.Text = "Score: " + score.ToString() + "%";
+            procentLabel.Visible = true;
 
             menuBtn.Visible = false;
 
-            startBtn.Text = "New Game";
-            startBtn.Visible = true;
+            startBtn.Text = "Try again";
+            
             quitBtn.Visible = true;
         }
 
@@ -330,7 +361,7 @@ namespace Hangman
             gameOverText.Text = "Game Over!";
             submitBtn.Visible = false;
             nextBtn.Visible = false;
-
+            legendBox.Visible = false;
             mainFrame.Visible = false;
 
             menuBtn.Visible = false;
@@ -338,7 +369,6 @@ namespace Hangman
             startBtn.Text = "Try again";
             startBtn.Visible = true;
             quitBtn.Visible = true;
-
         }
 
         private void Quit(object sender, EventArgs e)
@@ -348,9 +378,10 @@ namespace Hangman
 
         private void Menu_Click(object sender, EventArgs e)
         {
+
             gameOverText.Visible = false;
             submitBtn.Visible = false;
-
+            legendBox.Visible = false;
             mainFrame.Visible = false;
             nextBtn.Visible = false;
             menuBtn.Visible = false;
@@ -361,38 +392,40 @@ namespace Hangman
                 cb.Visible = false;
             }
 
-
-            startBtn.Visible = true;
             quitBtn.Visible = true;
             continueBtn.Visible = true;
-
-
-
-            startBtn.Text = "New Game";
-
         }
 
         private void Continue_Click(object sender, EventArgs e)
         {
-            gameOverText.Visible = true;
+
+            gameOverText.Visible = false;
             submitBtn.Visible = true;
             nextBtn.Visible = true;
             mainFrame.Visible = true;
             questionLabel.Visible = true;
             menuBtn.Visible = true;
+            legendBox.Visible = true;
 
             foreach (CheckBox cb in cbList)
             {
                 cb.Visible = true;
             }
 
-            startBtn.Visible = false;
+            Size = new Size(944, 954);
+
             quitBtn.Visible = false;
             continueBtn.Visible = false;
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
+            if (frameIndex == Frame.Length)
+            {
+                Game_Over();
+                return;
+            }
+
             nextBtn.Enabled = false;
             submitBtn.Enabled = false;
             foreach (CheckBox cb in cbList)
@@ -411,149 +444,6 @@ namespace Hangman
 
             LoadQuestion(Questions[listIndex]);
             LoadAnswers(Questions[listIndex++]);
-
-
         }
-
-
-        /*
-                private void GuessBtn_Click(object sender, EventArgs e)
-                {
-                    Check_Letter_in_Word();
-                }
-
-                private void Input_Enter(object sender, KeyEventArgs e)
-                {
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        e.SuppressKeyPress = true;
-                        Check_Letter_in_Word();
-                    }
-                }
-
-                private void Check_Letter_in_Word()
-                {
-                    errorLabel.Visible = false;
-
-                    string letters = input.Text;
-                    input.Text = string.Empty;
-
-                    char letter;
-                    for (int i = 0; i < letters.Length; i++)
-                    {
-                        letter = letters[i];
-                        if (letter >= 'A' && letter <= 'Z' || letter >= 'a' && letter <= 'z')
-                        {
-
-                            if (letter >= 'A' && letter <= 'Z')
-                                letter += ' ';
-
-                            if (!Is_Guessed_Letter(letter))
-                            {
-                                if (Word.ToLower().IndexOf(letter) < 0)
-                                {
-                                    guessedLetters.AppendText(letter.ToString() + " ");
-                                    LoadFrame(Frame[frameIndex++]);
-                                }
-                                else
-                                {
-                                    Unhide_Letter(letter);
-                                }
-
-                                if (frameIndex == Frame.Length)
-                                {
-                                    Game_Over();
-                                    break;
-                                }
-                                else if (Has_Won())
-                                {
-                                    Game_Won();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            errorLabel.Text = "*Input must be a valid letter [A-Za-z]";
-                            errorLabel.Visible = true;
-                            break;
-                        }
-                    }
-                }
-
-                private void Unhide_Letter(char letter)
-                {
-                    if (letter >= 'A' && letter <= 'Z')
-                        letter += ' ';
-
-
-                    string letters = Word.ToLower().Replace(letter, '\t');
-                    char[] temp = hiddenWord.ToCharArray();
-                    for (int i = 0; i < letters.Length; i++)
-                    {
-                        if (letters[i] == '\t')
-                        {
-                            temp[i * 2] = letter;
-                        }
-                    }
-                    hiddenWord = new string(temp);
-                    guessedWord.Text = hiddenWord;
-                }
-
-                private bool Is_Guessed_Letter(char letter)
-                {
-                    string content = guessedLetters.Text;
-                    for (int i = 0; i < content.Length; i += 2)
-                    {
-                        if (content[i] == letter) return true;
-                    }
-                    return false;
-                }
-
-
-
-                private string Get_Random_Word()
-                {
-                    StreamReader sr = new StreamReader(".\\input\\cuvinte.txt");
-                    string word = sr.ReadLine();
-
-                    int lineNumber = 0;
-                    Random rd = new Random();
-                    int index = rd.Next(0, 2308);
-
-                    while(word != null)
-                    {
-
-                        if (lineNumber == index)
-                            return word;
-                        lineNumber++;
-                        word = sr.ReadLine();
-                    }
-                    return string.Empty;
-                }
-
-                private string Hide_Word(string word)
-                {
-                    char[] chars = word.ToCharArray();
-                    char[] newchars = new char[chars.Length * 2];
-                    int j = 0;
-
-                    for (int i = 0; i < word.Length; i++)
-                    {
-                        if (chars[i] != ' ')
-                        {
-                            if (i == 0 || i == word.Length - 1)
-                            {
-                                newchars[j++] = chars[i];
-                                newchars[j++] = ' ';
-                                continue;
-                            }
-
-                            newchars[j++] = '_';
-                        }
-                        newchars[j++] = ' ';
-                    }
-
-                    return new string(newchars);
-                }*/
     }
 }

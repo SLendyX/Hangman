@@ -63,49 +63,9 @@ namespace Hangman.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _14e837b7_720f_4b97_ac4c_42c67e87a30c {
+        internal static System.Drawing.Bitmap back6 {
             get {
-                object obj = ResourceManager.GetObject("14e837b7-720f-4b97-ac4c-42c67e87a30c", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _22651ee4_d928_4bae_a4f3_d35dd4aa178c_1 {
-            get {
-                object obj = ResourceManager.GetObject("22651ee4-d928-4bae-a4f3-d35dd4aa178c_1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _40_original_file_I1 {
-            get {
-                object obj = ResourceManager.GetObject("40_original_file_I1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap _40_original_file_I1__1_ {
-            get {
-                object obj = ResourceManager.GetObject("40_original_file_I1 (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap output_onlinejpgtools {
-            get {
-                object obj = ResourceManager.GetObject("output-onlinejpgtools", resourceCulture);
+                object obj = ResourceManager.GetObject("back6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
